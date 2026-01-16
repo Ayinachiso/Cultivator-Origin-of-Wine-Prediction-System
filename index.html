@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wine Cultivator Origin Predictor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #6a0572 0%, #ab83a1 100%);
+            font-family: 'Montserrat', Arial, sans-serif;
+            color: #fff;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: rgba(255,255,255,0.08);
+            border-radius: 18px;
+            box-shadow: 0 8px 32px 0 rgba(106, 5, 114, 0.37);
+            padding: 44px 36px 36px 36px;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+        }
+        h2 {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.3em;
+            letter-spacing: 2px;
+            margin-bottom: 28px;
+            color: #ffe156;
+            text-shadow: 0 0 12px #ab83a1, 0 0 2px #fff;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        label {
+            font-size: 1.1em;
+            color: #ffe156;
+            margin-bottom: 4px;
+            text-align: left;
+        }
+        input[type="number"] {
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            background: #ab83a1;
+            color: #fff;
+            font-size: 1em;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            outline: none;
+            transition: background 0.2s;
+        }
+        input[type="number"]:focus {
+            background: #6a0572;
+        }
+        button[type="submit"] {
+            background: linear-gradient(90deg, #ffe156 0%, #6a0572 100%);
+            color: #6a0572;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            padding: 14px;
+            font-size: 1.1em;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: background 0.2s, color 0.2s;
+        }
+        button[type="submit"]:hover {
+            background: linear-gradient(90deg, #6a0572 0%, #ffe156 100%);
+            color: #fff;
+        }
+        .result {
+            margin-top: 32px;
+            font-size: 1.3em;
+            color: #ffe156;
+            text-shadow: 0 0 8px #ffe156;
+        }
+        .grape {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 18px;
+            display: inline-block;
+            background: radial-gradient(circle at 20px 20px, #ab83a1 60%, #6a0572 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 18px #ab83a1;
+        }
+        @media (max-width: 500px) {
+            .container {
+                padding: 24px 8px;
+            }
+            h2 {
+                font-size: 1.3em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="grape"></div>
+        <h2>Wine Cultivator Origin</h2>
+        <form action="/predict" method="post">
+            <label for="alcohol">Alcohol:</label>
+            <input type="number" step="any" name="alcohol" id="alcohol" required>
+
+            <label for="malic_acid">Malic Acid:</label>
+            <input type="number" step="any" name="malic_acid" id="malic_acid" required>
+
+            <label for="ash">Ash:</label>
+            <input type="number" step="any" name="ash" id="ash" required>
+
+            <label for="alcalinity">Alcalinity of Ash:</label>
+            <input type="number" step="any" name="alcalinity" id="alcalinity" required>
+
+            <label for="magnesium">Magnesium:</label>
+            <input type="number" step="any" name="magnesium" id="magnesium" required>
+
+            <button type="submit">Predict</button>
+        </form>
+        {% if prediction %}
+            <div class="result">{{ prediction }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
